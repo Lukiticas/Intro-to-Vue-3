@@ -11,16 +11,48 @@
   <body>
     <div id="app">
       <div class="nav-bar"></div>
-      
+
       <div class="product-display">
         <div class="product-container">
           <div class="product-image">
-            <img v-bind:src="image">
+            <img v-bind:src="image" />
           </div>
           <div class="product-info">
             <h1>{{ product }}</h1>
             <p v-if="inStock">In Stock</p>
             <p v-else>Out of Stock</p>
+            <ul>
+              <li v-for="detail in details">{{detail}}</li>
+            </ul>
+            <div v-for="variant in variants" :key="variant.id">
+              {{variant.color}}
+            </div>
+            <div>
+              <div
+                style="
+                  display: flex;
+                  flex-wrap: wrap;
+                  max-width: 5rem;
+                  gap: 0.5rem;
+                  margin-block: 0.5rem;
+                "
+              >
+                <div
+                  v-for="obj in objs"
+                  style="
+                    width: 30px;
+                    height: 30px;
+                    outline: 0.1rem solid greenyellow;
+                    display: grid;
+                    place-items: center;
+                  "
+                  :key="obj.key"
+                >
+                  {{obj}}
+                </div>
+              </div>
+              <button v-on:click="addObj">Add obj</button>
+            </div>
           </div>
         </div>
       </div>
@@ -31,7 +63,7 @@
 
     <!-- Mount App -->
     <script>
-      const mountedApp = app.mount('#app')
+      const mountedApp = app.mount("#app");
     </script>
   </body>
 </html>
